@@ -1,12 +1,13 @@
 import 'dart:convert';
 
-import 'package:product_list/core/error.dart';
+import 'package:product_list/core/failure.dart';
 import 'package:product_list/feature/data/models/models.dart';
+import 'package:product_list/feature/domain/entities/product_entity.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 abstract class ProductLocalStorageDataSource {
   Future<List<ProductModel>> list();
-  Future<bool> create(ProductModel product);
+  Future<ProductEntity> create(ProductModel product);
   Future<bool> delete(ProductModel product);
   Future<bool> change(ProductModel product);
   Future<bool> delleteAllProducts();
@@ -33,7 +34,7 @@ class ProductLocalStorageDataSourceImpl
   }
 
   @override
-  Future<bool> create(ProductModel product) async {
+  Future<ProductEntity> create(ProductModel product) async {
     try {
       var keys = sharedPreferences.getKeys();
       List<ProductModel> productList = [];
@@ -49,10 +50,11 @@ class ProductLocalStorageDataSourceImpl
       }
       var json = product.toJson;
       json["id"] = productList.length + 1;
-      return await sharedPreferences.setString(
+      await sharedPreferences.setString(
         '$prefixProductKey${product.id}',
         jsonEncode(product),
       );
+      return ProductModel.fromJson(json);
     } catch (err) {
       throw const FailureResponse('LOCAL_ERROR', 500);
     }

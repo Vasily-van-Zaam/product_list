@@ -1,5 +1,5 @@
 import 'package:dartz/dartz.dart';
-import 'package:product_list/core/error.dart';
+import 'package:product_list/core/failure.dart';
 import 'package:product_list/core/use_case.dart';
 import 'package:product_list/feature/domain/repositories/product_repository.dart';
 

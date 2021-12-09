@@ -1,0 +1,14 @@
+{
+    "title_app": "Product list app",
+    "product": "Product",
+    "product_list": "Product list",
+    "list": "List",
+    "done": "Done",
+    "name": "Name",
+    "delete": "Delete",
+    "create": "Create",
+    "change": "Change",
+    "add": "Add",
+    "settings": "Settings"
+
+}

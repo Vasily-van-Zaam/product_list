@@ -1,4 +1,4 @@
-import 'package:product_list/core/error.dart';
+import 'package:product_list/core/failure.dart';
 import 'package:product_list/feature/data/datasources/datasources.dart';
 import 'package:product_list/feature/data/models/models.dart';
 import 'package:product_list/feature/domain/entities/product_entity.dart';
@@ -49,7 +49,7 @@ class ProductRepositoryImpl extends ProductRepository {
   }
 
   @override
-  Future<Either<Failure, bool>> create(ProductEntity entity) async {
+  Future<Either<Failure, ProductEntity>> create(ProductEntity entity) async {
     try {
       ProductModel model = ProductModel(
         id: entity.id,

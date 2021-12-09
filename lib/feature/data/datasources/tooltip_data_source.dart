@@ -1,12 +1,12 @@
 import 'dart:convert';
 
-import 'package:product_list/core/error.dart';
+import 'package:product_list/core/failure.dart';
 import 'package:product_list/feature/data/models/models.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 abstract class TooltipLocalStorageDataSource {
   Future<List<TooltipModel>> getList({String? search, int? limit});
-  Future<bool> create(TooltipModel model);
+  Future<TooltipModel> create(TooltipModel model);
   Future<bool> delete(TooltipModel model);
 }
 
@@ -18,15 +18,18 @@ class TooltipLocalStorageDataSourceImpl
 
   TooltipLocalStorageDataSourceImpl(this.sharedPreferences);
   @override
-  Future<bool> create(TooltipModel model) async {
+  Future<TooltipModel> create(TooltipModel model) async {
     try {
       var strList = sharedPreferences.getStringList(tooltipListKey) ?? [];
       Set<String> setList = strList.toSet();
-      model.toJson["name"] = model.toJson["name"]?.trim();
+      var json = model.toJson;
+      json["name"] = json["name"]?.trim();
+      json["id"] = setList.length + 1;
+
       setList.add(jsonEncode(model.toJson));
 
-      return await sharedPreferences.setStringList(
-          tooltipListKey, setList.toList());
+      await sharedPreferences.setStringList(tooltipListKey, setList.toList());
+      return TooltipModel.fromJson(json);
     } catch (err) {
       throw const FailureResponse('LOCAL_ERROR', 500);
     }
