@@ -5,7 +5,7 @@ import 'package:product_list/feature/data/models/models.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 abstract class TooltipLocalStorageDataSource {
-  Future<List<TooltipModel>> list();
+  Future<List<TooltipModel>> getList({String? search, int? limit});
   Future<bool> create(TooltipModel model);
   Future<bool> delete(TooltipModel model);
 }
@@ -44,7 +44,7 @@ class TooltipLocalStorageDataSourceImpl
   }
 
   @override
-  Future<List<TooltipModel>> list() async {
+  Future<List<TooltipModel>> getList({String? search = '', int? limit}) async {
     try {
       var strList = sharedPreferences.getStringList(tooltipListKey) ?? [];
       List<TooltipModel> list = [];
@@ -56,7 +56,9 @@ class TooltipLocalStorageDataSourceImpl
           ),
         );
       }
-      return list;
+      return list
+          .where((e) => e.name.toLowerCase().contains(search!.toLowerCase()))
+          .toList();
     } catch (err) {
       throw const FailureResponse('LOCAL_ERROR', 500);
     }

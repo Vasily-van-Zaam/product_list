@@ -11,7 +11,6 @@ class GetList extends UseCase<List<ProductEntity>, dynamic> {
   GetList(this.productRepository);
   @override
   Future<Either<Failure, List<ProductEntity>>> call([params]) {
-    // TODO: implement call
-    throw UnimplementedError();
+    return productRepository.getList();
   }
 }

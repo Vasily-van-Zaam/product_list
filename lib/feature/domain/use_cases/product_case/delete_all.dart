@@ -9,7 +9,6 @@ class DeleteAll extends UseCase<bool, dynamic> {
   DeleteAll(this.productRepository);
   @override
   Future<Either<Failure, bool>> call([params]) {
-    // TODO: implement call
-    throw UnimplementedError();
+    return productRepository.deleteAllProducts();
   }
 }

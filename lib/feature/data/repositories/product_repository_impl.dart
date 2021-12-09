@@ -83,7 +83,7 @@ class ProductRepositoryImpl extends ProductRepository {
   }
 
   @override
-  Future<Either<Failure, List<ProductEntity>>> list() async {
+  Future<Either<Failure, List<ProductEntity>>> getList() async {
     try {
       var list = await productLocalStorageDataSource.list();
       return Right(list);

@@ -10,7 +10,6 @@ class Change extends UseCase<bool, ProductEntity> {
   Change(this.productRepository);
   @override
   Future<Either<Failure, bool>> call(params) {
-    // TODO: implement call
-    throw UnimplementedError();
+    return productRepository.change(params);
   }
 }

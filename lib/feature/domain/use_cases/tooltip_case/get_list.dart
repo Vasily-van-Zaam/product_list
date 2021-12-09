@@ -11,8 +11,8 @@ class GetList extends UseCase<List<TooltipEntity>, GetListParams> {
   GetList(this.tooltipRepository);
   @override
   Future<Either<Failure, List<TooltipEntity>>> call(params) async {
-    // TODO: implement call
-    throw UnimplementedError();
+    return tooltipRepository.getList(
+        search: params.search, limit: params.limit);
   }
 }
 
