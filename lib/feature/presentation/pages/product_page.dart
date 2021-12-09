@@ -20,8 +20,8 @@ class _ProductPageState extends State<ProductPage> {
             borderRadius: BorderRadius.only(
               topLeft: Radius.circular(40),
               topRight: Radius.circular(40),
-              bottomRight: Radius.circular(40),
-              bottomLeft: Radius.circular(40),
+              // bottomRight: Radius.circular(40),
+              // bottomLeft: Radius.circular(40),
             ),
           ),
         ),
