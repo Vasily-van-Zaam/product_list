@@ -46,7 +46,7 @@ class MyIconButton extends StatelessWidget {
       child: TextButton.icon(
         onPressed: () {},
         icon: icon,
-        label: Text(''),
+        label: const Text(''),
       ),
     );
   }
