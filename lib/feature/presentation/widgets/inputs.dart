@@ -165,7 +165,7 @@ class _MyAutocompleteState extends State<MyAutocomplete> {
             onPressed: () {
               textEditingController.clear();
             },
-            icon: Icon(Icons.close, size: 15),
+            icon: const Icon(Icons.close, size: 15),
           ),
         ),
       ),
