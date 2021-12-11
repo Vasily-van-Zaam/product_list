@@ -165,7 +165,9 @@ class _MyAutocompleteState extends State<MyAutocomplete> {
         ),
       ),
       body: TextFormField(
+        maxLines: null,
         decoration: InputDecoration(
+            contentPadding: inputContentPaddingMoreRight,
             label: widget.label,
             focusedBorder: OutlineInputBorder(
               borderRadius: BorderRadius.only(

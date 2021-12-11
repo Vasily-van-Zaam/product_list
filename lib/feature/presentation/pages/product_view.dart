@@ -146,6 +146,7 @@ class _ProductViewState extends State<ProductView> {
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: TextFormField(
+                        maxLines: null,
                         controller: _descriptionController,
                         onChanged: (v) {
                           setState(() {
