@@ -23,7 +23,7 @@ class _ProductListDonePageState extends State<ProductListDonePage> {
   bool _isLoading = false;
   ProductEntity? _currentProduct;
 
-  List<ProductEntity> _prroductList = [];
+  List<ProductEntity> _productList = [];
 
   @override
   Widget build(BuildContext context) {
@@ -45,21 +45,21 @@ class _ProductListDonePageState extends State<ProductListDonePage> {
         }
         if (state is ProductGetListLoaded) {
           setState(() {
-            _prroductList = state.list.where((e) => e.isDone is bool).toList();
+            _productList = state.list.where((e) => e.isDone is bool).toList();
             _isLoading = false;
           });
         }
         if (state is ProductCreated) {
           setState(() {
             _openProductView = false;
-            _prroductList.add(state.entity);
+            _productList.add(state.entity);
             _isLoading = false;
           });
         }
         if (state is ProductChanged) {
           setState(() {
             _openProductView = false;
-            _prroductList = _prroductList.map((e) {
+            _productList = _productList.map((e) {
               if (e.id == state.entity.id) {
                 return state.entity;
               }
@@ -116,11 +116,11 @@ class _ProductListDonePageState extends State<ProductListDonePage> {
                 padding: const EdgeInsets.only(top: 0),
                 keyboardDismissBehavior:
                     ScrollViewKeyboardDismissBehavior.onDrag,
-                itemCount: _prroductList.length,
+                itemCount: _productList.length,
                 itemBuilder: (context, i) {
-                  var product = _prroductList[i];
+                  var product = _productList[i];
                   return DissmissibleWidget(
-                    key: ValueKey<int>(_prroductList[i].id ?? 1),
+                    key: ValueKey<int>(_productList[i].id ?? 1),
                     colorLeft: Colors.blue,
                     iconLeft: const Icon(
                       Icons.assignment_return_outlined,
@@ -140,10 +140,10 @@ class _ProductListDonePageState extends State<ProductListDonePage> {
                         );
                       }
                       setState(() {
-                        _prroductList.removeAt(i);
+                        _productList.removeAt(i);
                       });
                     },
-                    item: _prroductList,
+                    item: _productList,
                     child: ProductItem(
                       product: product,
                       onTap: () {
@@ -167,7 +167,7 @@ class _ProductListDonePageState extends State<ProductListDonePage> {
             AnimatedSwitcher(
               duration: const Duration(milliseconds: 200),
               transitionBuilder: animatedSwitcherScaleTransition,
-              child: _prroductList.isEmpty
+              child: _productList.isEmpty
                   ? MessageEmptyList(
                       S.of(context).so_far_nothing_has_been_done,
                     )

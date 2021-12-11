@@ -155,13 +155,18 @@ class _MyAutocompleteState extends State<MyAutocomplete> {
         ? textEditingController.text = widget.initialValue ?? ''
         : null;
     return WrapButtons(
-      sufix: IconButton(
-        onPressed: () {
-          textEditingController.clear();
-        },
-        icon: const Padding(
-          padding: EdgeInsets.all(13.0),
-          child: Icon(Icons.close, size: 15),
+      sufix: Padding(
+        padding: const EdgeInsets.all(2),
+        child: Material(
+          color: Colors.transparent,
+          shape: const CircleBorder(),
+          clipBehavior: Clip.hardEdge,
+          child: IconButton(
+            onPressed: () {
+              textEditingController.clear();
+            },
+            icon: Icon(Icons.close, size: 15),
+          ),
         ),
       ),
       body: TextFormField(

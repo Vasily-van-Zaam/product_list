@@ -24,7 +24,7 @@ class _ProductListPageState extends State<ProductListPage> {
   bool _isLoading = false;
   ProductEntity? _currentProduct;
 
-  List<ProductEntity> _prroductList = [];
+  List<ProductEntity> _productList = [];
 
   @override
   Widget build(BuildContext context) {
@@ -50,27 +50,28 @@ class _ProductListPageState extends State<ProductListPage> {
         }
         if (state is ProductGetListLoaded) {
           setState(() {
-            _prroductList = state.list.where((e) => e.isDone == null).toList();
+            _productList = state.list.where((e) => e.isDone == null).toList();
             _isLoading = false;
+            _openProductView = false;
           });
         }
         if (state is ProductCreated) {
           setState(() {
             _openProductView = false;
-            _prroductList.add(state.entity);
+            _productList.add(state.entity);
             _isLoading = false;
           });
         }
         if (state is ProductChanged) {
           setState(() {
             _openProductView = false;
-            _prroductList = _prroductList.map((e) {
+            _productList = _productList.map((e) {
               if (e.id == state.entity.id) {
                 return state.entity;
               }
               return e;
             }).toList();
-
+            _currentProduct = null;
             BlocProvider.of<ProductBloc>(context).add(
               ProductGetList(),
             );
@@ -121,12 +122,12 @@ class _ProductListPageState extends State<ProductListPage> {
                 padding: const EdgeInsets.only(top: 0),
                 keyboardDismissBehavior:
                     ScrollViewKeyboardDismissBehavior.onDrag,
-                itemCount: _prroductList.length,
+                itemCount: _productList.length,
                 itemBuilder: (context, i) {
-                  var product = _prroductList[i];
+                  var product = _productList[i];
                   return DissmissibleWidget(
                     key: ValueKey<int>(
-                      _prroductList[i].id ?? 1,
+                      _productList[i].id ?? 1,
                     ),
                     iconLeft: const Icon(
                       Icons.done,
@@ -151,10 +152,10 @@ class _ProductListPageState extends State<ProductListPage> {
                       }
 
                       setState(() {
-                        _prroductList.removeAt(i);
+                        _productList.removeAt(i);
                       });
                     },
-                    item: _prroductList,
+                    item: _productList,
                     child: ProductItem(
                       product: product,
                       onTap: () {
@@ -178,7 +179,7 @@ class _ProductListPageState extends State<ProductListPage> {
             AnimatedSwitcher(
               duration: const Duration(milliseconds: 200),
               transitionBuilder: animatedSwitcherScaleTransition,
-              child: _prroductList.isEmpty && !_openProductView
+              child: _productList.isEmpty && !_openProductView
                   ? MessageEmptyList(
                       S.of(context).so_far_empty,
                     )
