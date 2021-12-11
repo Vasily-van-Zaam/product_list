@@ -25,14 +25,30 @@ class MessageLookup extends MessageLookupByLibrary {
         "add": MessageLookupByLibrary.simpleMessage("Добавить"),
         "change": MessageLookupByLibrary.simpleMessage("Изменить"),
         "create": MessageLookupByLibrary.simpleMessage("Создать"),
+        "create_new_product":
+            MessageLookupByLibrary.simpleMessage("Создание нового продукта"),
         "delete": MessageLookupByLibrary.simpleMessage("Удалить"),
+        "description": MessageLookupByLibrary.simpleMessage("Описание"),
         "done": MessageLookupByLibrary.simpleMessage("Выполнено"),
+        "editing": MessageLookupByLibrary.simpleMessage("Редакт."),
+        "gram": MessageLookupByLibrary.simpleMessage("гр."),
+        "kgram": MessageLookupByLibrary.simpleMessage("кГр."),
         "list": MessageLookupByLibrary.simpleMessage("Список"),
+        "liters": MessageLookupByLibrary.simpleMessage("Л."),
         "name": MessageLookupByLibrary.simpleMessage("Имя"),
+        "new_product": MessageLookupByLibrary.simpleMessage("Новый продукт"),
+        "pieces": MessageLookupByLibrary.simpleMessage("шт."),
         "product": MessageLookupByLibrary.simpleMessage("Продукт"),
         "product_list":
-            MessageLookupByLibrary.simpleMessage("PСписок продуктов"),
+            MessageLookupByLibrary.simpleMessage("Список продуктов"),
+        "product_list_done":
+            MessageLookupByLibrary.simpleMessage("Список купленных продуктов"),
+        "save": MessageLookupByLibrary.simpleMessage("Сохронить"),
         "settings": MessageLookupByLibrary.simpleMessage("Настройки"),
+        "so_far_empty": MessageLookupByLibrary.simpleMessage(
+            "Пока пусто. Добавте новый продукт"),
+        "so_far_nothing_has_been_done":
+            MessageLookupByLibrary.simpleMessage("Пока ничего не выполнено"),
         "title_app":
             MessageLookupByLibrary.simpleMessage("Приложения список продуктов")
       };

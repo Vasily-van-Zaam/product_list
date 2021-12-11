@@ -23,7 +23,7 @@ int() async {
     () => TooltipCubit(sl()),
   );
   // UseCases
-  sl.registerSingleton(
+  sl.registerLazySingleton(
     () => ProductCases(sl()),
   );
   sl.registerLazySingleton(

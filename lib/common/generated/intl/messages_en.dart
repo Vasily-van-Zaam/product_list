@@ -25,13 +25,29 @@ class MessageLookup extends MessageLookupByLibrary {
         "add": MessageLookupByLibrary.simpleMessage("Add"),
         "change": MessageLookupByLibrary.simpleMessage("Change"),
         "create": MessageLookupByLibrary.simpleMessage("Create"),
+        "create_new_product":
+            MessageLookupByLibrary.simpleMessage("Create new product"),
         "delete": MessageLookupByLibrary.simpleMessage("Delete"),
+        "description": MessageLookupByLibrary.simpleMessage("Description"),
         "done": MessageLookupByLibrary.simpleMessage("Done"),
+        "editing": MessageLookupByLibrary.simpleMessage("Editing"),
+        "gram": MessageLookupByLibrary.simpleMessage("g."),
+        "kgram": MessageLookupByLibrary.simpleMessage("kg."),
         "list": MessageLookupByLibrary.simpleMessage("List"),
+        "liters": MessageLookupByLibrary.simpleMessage("L."),
         "name": MessageLookupByLibrary.simpleMessage("Name"),
+        "new_product": MessageLookupByLibrary.simpleMessage("New product"),
+        "pieces": MessageLookupByLibrary.simpleMessage("pcs."),
         "product": MessageLookupByLibrary.simpleMessage("Product"),
         "product_list": MessageLookupByLibrary.simpleMessage("Product list"),
+        "product_list_done":
+            MessageLookupByLibrary.simpleMessage("List of purchased products"),
+        "save": MessageLookupByLibrary.simpleMessage("Save"),
         "settings": MessageLookupByLibrary.simpleMessage("Settings"),
+        "so_far_empty": MessageLookupByLibrary.simpleMessage(
+            "So far empty. Add new product"),
+        "so_far_nothing_has_been_done": MessageLookupByLibrary.simpleMessage(
+            "So far nothing has been done"),
         "title_app": MessageLookupByLibrary.simpleMessage("Product list app")
       };
 }

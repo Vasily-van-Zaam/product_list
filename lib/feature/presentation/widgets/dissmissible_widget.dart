@@ -4,7 +4,7 @@ class DissmissibleWidget<T> extends StatelessWidget {
   final T item;
   final Widget child;
   final Icon? iconLeft;
-  final Icon? iconRights;
+  final Icon? iconRight;
   final Color? colorLeft;
   final Color? colorRight;
 
@@ -15,7 +15,7 @@ class DissmissibleWidget<T> extends StatelessWidget {
     required this.child,
     required this.onDismissed,
     this.iconLeft,
-    this.iconRights,
+    this.iconRight,
     this.colorLeft,
     this.colorRight,
   }) : super(key: key);
@@ -31,15 +31,17 @@ class DissmissibleWidget<T> extends StatelessWidget {
 
   Widget buildSwipeActionLeft() => Container(
         alignment: Alignment.centerLeft,
-        padding: const EdgeInsets.symmetric(horizontal: 20),
+        padding: const EdgeInsets.symmetric(horizontal: 30),
         color: colorLeft ?? Colors.green,
-        child: iconLeft ?? const Icon(Icons.done),
+        child:
+            iconLeft ?? const Icon(Icons.done, color: Colors.white, size: 40),
       );
 
   Widget buildSwipeActionRight() => Container(
         alignment: Alignment.centerRight,
-        padding: const EdgeInsets.symmetric(horizontal: 20),
+        padding: const EdgeInsets.symmetric(horizontal: 30),
         color: colorRight ?? Colors.red,
-        child: iconRights ?? const Icon(Icons.delete),
+        child: iconRight ??
+            const Icon(Icons.delete, color: Colors.white, size: 40),
       );
 }

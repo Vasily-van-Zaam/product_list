@@ -21,7 +21,7 @@ class _AppState extends State<App> {
     return MultiBlocProvider(
       providers: [
         BlocProvider<ProductBloc>(
-          create: (context) => sl<ProductBloc>(),
+          create: (context) => sl<ProductBloc>()..add(ProductGetList()),
         ),
         BlocProvider<TooltipCubit>(
           create: (context) => sl<TooltipCubit>(),
@@ -35,7 +35,7 @@ class _AppState extends State<App> {
           GlobalCupertinoLocalizations.delegate,
         ],
         debugShowCheckedModeBanner: false,
-        // locale: const Locale('en'),
+        locale: const Locale('ru'),
         title: 'Product list',
         theme: AppTheme.lightTheme,
         home: const Navigtion(),

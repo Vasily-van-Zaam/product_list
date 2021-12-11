@@ -1,9 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-
 import 'package:product_list/feature/domain/entities/tooltip_entity.dart';
 import 'package:product_list/feature/domain/use_cases/tooltip_case/tooltip_cases.dart';
-import 'package:product_list/feature/domain/use_cases/tooltip_case/get_list.dart';
 
 part 'tooltip_state.dart';
 
@@ -23,6 +21,7 @@ class TooltipCubit extends Cubit<TooltipState> {
 
   getList(GetListParams parapms) async {
     var res = await tooltipCases.getList(parapms);
+
     emit(
       res.fold(
         (l) => TooltipError(l.message, l.status),

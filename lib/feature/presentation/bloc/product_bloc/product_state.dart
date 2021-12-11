@@ -16,8 +16,9 @@ class ProductError extends ProductState {
   final int status;
 
   const ProductError(this.message, this.status);
+
   @override
-  List<Object> get props => [];
+  List<Object> get props => [message, status];
 }
 
 class ProductGetListLoaded extends ProductState {
@@ -36,8 +37,20 @@ class ProductCreated extends ProductState {
   List<Object> get props => [entity];
 }
 
-class ProductDeleted extends ProductState {}
+class ProductDeleted extends ProductState {
+  final ProductEntity entity;
+
+  const ProductDeleted(this.entity);
+  @override
+  List<Object> get props => [entity];
+}
 
 class ProductAllDeleted extends ProductState {}
 
-class ProductChanged extends ProductState {}
+class ProductChanged extends ProductState {
+  final ProductEntity entity;
+
+  const ProductChanged(this.entity);
+  @override
+  List<Object> get props => [entity];
+}

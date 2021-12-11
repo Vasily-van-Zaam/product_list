@@ -70,11 +70,71 @@ class S {
     );
   }
 
+  /// `New product`
+  String get new_product {
+    return Intl.message(
+      'New product',
+      name: 'new_product',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Create new product`
+  String get create_new_product {
+    return Intl.message(
+      'Create new product',
+      name: 'create_new_product',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Save`
+  String get save {
+    return Intl.message(
+      'Save',
+      name: 'save',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Product list`
   String get product_list {
     return Intl.message(
       'Product list',
       name: 'product_list',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `List of purchased products`
+  String get product_list_done {
+    return Intl.message(
+      'List of purchased products',
+      name: 'product_list_done',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `So far nothing has been done`
+  String get so_far_nothing_has_been_done {
+    return Intl.message(
+      'So far nothing has been done',
+      name: 'so_far_nothing_has_been_done',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `So far empty. Add new product`
+  String get so_far_empty {
+    return Intl.message(
+      'So far empty. Add new product',
+      name: 'so_far_empty',
       desc: '',
       args: [],
     );
@@ -140,6 +200,16 @@ class S {
     );
   }
 
+  /// `Editing`
+  String get editing {
+    return Intl.message(
+      'Editing',
+      name: 'editing',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Add`
   String get add {
     return Intl.message(
@@ -150,11 +220,61 @@ class S {
     );
   }
 
+  /// `Description`
+  String get description {
+    return Intl.message(
+      'Description',
+      name: 'description',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Settings`
   String get settings {
     return Intl.message(
       'Settings',
       name: 'settings',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `L.`
+  String get liters {
+    return Intl.message(
+      'L.',
+      name: 'liters',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `pcs.`
+  String get pieces {
+    return Intl.message(
+      'pcs.',
+      name: 'pieces',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `g.`
+  String get gram {
+    return Intl.message(
+      'g.',
+      name: 'gram',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `kg.`
+  String get kgram {
+    return Intl.message(
+      'kg.',
+      name: 'kgram',
       desc: '',
       args: [],
     );

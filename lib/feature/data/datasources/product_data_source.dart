@@ -2,14 +2,14 @@ import 'dart:convert';
 
 import 'package:product_list/core/failure.dart';
 import 'package:product_list/feature/data/models/models.dart';
-import 'package:product_list/feature/domain/entities/product_entity.dart';
+
 import 'package:shared_preferences/shared_preferences.dart';
 
 abstract class ProductLocalStorageDataSource {
-  Future<List<ProductModel>> list();
-  Future<ProductEntity> create(ProductModel product);
-  Future<bool> delete(ProductModel product);
-  Future<bool> change(ProductModel product);
+  Future<List<ProductModel>> getList();
+  Future<ProductModel> create(ProductModel product);
+  Future<ProductModel> delete(ProductModel product);
+  Future<ProductModel> change(ProductModel product);
   Future<bool> delleteAllProducts();
   Future<bool> cleanData();
 }
@@ -22,71 +22,81 @@ class ProductLocalStorageDataSourceImpl
 
   ProductLocalStorageDataSourceImpl(this.sharedPreferences);
   @override
-  Future<bool> change(ProductModel product) async {
+  Future<ProductModel> change(ProductModel product) async {
     try {
-      return await sharedPreferences.setString(
+      await sharedPreferences.setString(
         '$prefixProductKey${product.id}',
         jsonEncode(product.toJson),
       );
+      return product;
     } catch (err) {
       throw const FailureResponse('LOCAL_ERROR', 500);
     }
   }
 
   @override
-  Future<ProductEntity> create(ProductModel product) async {
+  Future<ProductModel> create(ProductModel product) async {
     try {
       var keys = sharedPreferences.getKeys();
       List<ProductModel> productList = [];
+
       for (var k in keys) {
-        var val = sharedPreferences.getString(k);
-        if (k.contains(prefixProductKey) && val is String) {
-          productList.add(
-            ProductModel.fromJson(
-              jsonDecode(val),
-            ),
-          );
+        if (k.contains(prefixProductKey)) {
+          var val = sharedPreferences.getString(k);
+          if (val is String) {
+            productList.add(
+              ProductModel.fromJson(
+                jsonDecode(val),
+              ),
+            );
+          }
         }
       }
       var json = product.toJson;
-      json["id"] = productList.length + 1;
+      json["id"] = productList.length;
+
       await sharedPreferences.setString(
-        '$prefixProductKey${product.id}',
-        jsonEncode(product),
+        '$prefixProductKey${json["id"]}',
+        jsonEncode(json),
       );
       return ProductModel.fromJson(json);
     } catch (err) {
-      throw const FailureResponse('LOCAL_ERROR', 500);
+      throw FailureResponse('LOCAL_ERROR $err', 500);
     }
   }
 
   @override
-  Future<bool> delete(ProductModel product) async {
+  Future<ProductModel> delete(ProductModel product) async {
     try {
-      return await sharedPreferences.remove('product_${product.id}');
+      await sharedPreferences.remove('product_${product.id}');
+      return product;
     } catch (err) {
-      throw const FailureResponse('LOCAL_ERROR', 500);
+      throw FailureResponse('LOCAL_ERROR $err', 500);
     }
   }
 
   @override
-  Future<List<ProductModel>> list() async {
+  Future<List<ProductModel>> getList() async {
     try {
       var keys = sharedPreferences.getKeys();
       List<ProductModel> productList = [];
+
       for (var k in keys) {
-        var val = sharedPreferences.getString(k);
-        if (k.contains(prefixProductKey) && val is String) {
-          productList.add(
-            ProductModel.fromJson(
-              jsonDecode(val),
-            ),
-          );
+        if (k.contains(prefixProductKey)) {
+          var val = sharedPreferences.getString(k);
+          if (val is String) {
+            productList.add(
+              ProductModel.fromJson(
+                jsonDecode(val),
+              ),
+            );
+          }
         }
       }
+
       return productList;
     } catch (err) {
-      throw const FailureResponse('LOCAL_ERROR', 500);
+      throw FailureResponse('LOCAL_ERROR $err', 500);
     }
   }
 
@@ -101,7 +111,7 @@ class ProductLocalStorageDataSourceImpl
       }
       return true;
     } catch (err) {
-      throw const FailureResponse('LOCAL_ERROR', 500);
+      throw FailureResponse('LOCAL_ERROR $err', 500);
     }
   }
 

@@ -39,7 +39,8 @@ class TooltipLocalStorageDataSourceImpl
   Future<bool> delete(TooltipModel model) async {
     try {
       var strList = sharedPreferences.getStringList(tooltipListKey) ?? [];
-      strList.remove(model.name.trim());
+
+      strList.remove(jsonEncode(model.toJson));
       return await sharedPreferences.setStringList(tooltipListKey, strList);
     } catch (err) {
       throw const FailureResponse('LOCAL_ERROR', 500);
@@ -51,11 +52,13 @@ class TooltipLocalStorageDataSourceImpl
     try {
       var strList = sharedPreferences.getStringList(tooltipListKey) ?? [];
       List<TooltipModel> list = [];
+
       for (var i = 0; i < strList.length; i++) {
+        var json = jsonDecode(strList[i]);
         list.add(
           TooltipModel(
             id: i,
-            name: strList[i],
+            name: json["name"],
           ),
         );
       }

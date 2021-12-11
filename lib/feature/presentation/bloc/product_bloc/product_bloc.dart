@@ -50,7 +50,7 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
     emit(
       res.fold(
         (l) => ProductError(l.message, l.status),
-        (r) => ProductChanged(),
+        (r) => ProductChanged(r),
       ),
     );
   }
@@ -62,7 +62,7 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
     emit(
       res.fold(
         (l) => ProductError(l.message, l.status),
-        (r) => ProductDeleted(),
+        (r) => ProductDeleted(r),
       ),
     );
   }

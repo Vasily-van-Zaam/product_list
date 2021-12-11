@@ -10,7 +10,7 @@ class ProductRepositoryImpl extends ProductRepository {
 
   ProductRepositoryImpl(this.productLocalStorageDataSource);
   @override
-  Future<Either<Failure, bool>> change(ProductEntity entity) async {
+  Future<Either<Failure, ProductEntity>> change(ProductEntity entity) async {
     try {
       ProductModel model = ProductModel(
         id: entity.id,
@@ -21,18 +21,12 @@ class ProductRepositoryImpl extends ProductRepository {
         quantity: entity.quantity,
         quantityType: entity.quantityType,
       );
-      var res = await productLocalStorageDataSource.change(model);
-      if (res) {
-        return Right(res);
-      } else {
-        return const Left(
-          FailureResponse('ERROR CHANGE PRODUCT RETURN FALSE', 500),
-        );
-      }
+      var change = await productLocalStorageDataSource.change(model);
+      return Right(change.toEntity());
     } on Failure catch (err) {
       return Left(err);
     } catch (err) {
-      return const Left(FailureResponse('SOME ERROR', 500));
+      return Left(FailureResponse('SOME ERROR $err', 500));
     }
   }
 
@@ -61,7 +55,7 @@ class ProductRepositoryImpl extends ProductRepository {
         quantityType: entity.quantityType,
       );
       var create = await productLocalStorageDataSource.create(model);
-      return Right(create);
+      return Right(create.toEntity());
     } on Failure catch (err) {
       return Left(err);
     } catch (err) {
@@ -85,8 +79,10 @@ class ProductRepositoryImpl extends ProductRepository {
   @override
   Future<Either<Failure, List<ProductEntity>>> getList() async {
     try {
-      var list = await productLocalStorageDataSource.list();
-      return Right(list);
+      var list = await productLocalStorageDataSource.getList();
+      return Right(
+        list.map((m) => m.toEntity()).toList(),
+      );
     } on Failure catch (err) {
       return Left(err);
     } catch (err) {
@@ -95,11 +91,11 @@ class ProductRepositoryImpl extends ProductRepository {
   }
 
   @override
-  Future<Either<Failure, bool>> delete(ProductEntity entity) async {
+  Future<Either<Failure, ProductEntity>> delete(ProductEntity entity) async {
     try {
       var delete = await productLocalStorageDataSource
           .delete(ProductModel(id: entity.id));
-      return Right(delete);
+      return Right(delete.toEntity());
     } on Failure catch (err) {
       return Left(err);
     } catch (err) {

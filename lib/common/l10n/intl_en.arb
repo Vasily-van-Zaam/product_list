@@ -1,14 +1,26 @@
 {
     "title_app": "Product list app",
     "product": "Product",
+    "new_product": "New product",
+    "create_new_product": "Create new product",
+    "save": "Save",
     "product_list": "Product list",
+    "product_list_done": "List of purchased products",
+    "so_far_nothing_has_been_done": "So far nothing has been done",
+    "so_far_empty": "So far empty. Add new product",
     "list": "List",
     "done": "Done",
     "name": "Name",
     "delete": "Delete",
     "create": "Create",
     "change": "Change",
+    "editing": "Editing",
     "add": "Add",
-    "settings": "Settings"
+    "description": "Description",
+    "settings": "Settings",
+    "liters": "L.",
+    "pieces": "pcs.",
+    "gram": "g.",
+    "kgram": "kg."
 
 }
