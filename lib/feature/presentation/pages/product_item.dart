@@ -11,6 +11,8 @@ class ProductItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var currency =
+        S.of(context).lang == 'ru' ? S.of(context).rub : S.of(context).dollar;
     return Container(
       padding: const EdgeInsets.only(top: 10, bottom: 10),
       decoration: boxDecorationItemList,
@@ -24,9 +26,9 @@ class ProductItem extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text('${product.summ.toInt()} \$'),
+                Text('${product.summ.toInt()} $currency'),
                 Text(
-                  '${product.price.toInt()} \$/${selectPrefixString(context, product.quantityType)}',
+                  '${product.price.toInt()} $currency/${selectPrefixString(context, product.quantityType)}',
                 ),
               ],
             ),

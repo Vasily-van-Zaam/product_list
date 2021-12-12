@@ -29,6 +29,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Create new product"),
         "delete": MessageLookupByLibrary.simpleMessage("Delete"),
         "description": MessageLookupByLibrary.simpleMessage("Description"),
+        "dollar": MessageLookupByLibrary.simpleMessage("\$"),
         "done": MessageLookupByLibrary.simpleMessage("Done"),
         "editing": MessageLookupByLibrary.simpleMessage("Editing"),
         "gram": MessageLookupByLibrary.simpleMessage("g."),
@@ -43,6 +44,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "product_list": MessageLookupByLibrary.simpleMessage("Product list"),
         "product_list_done":
             MessageLookupByLibrary.simpleMessage("List of purchased products"),
+        "rub": MessageLookupByLibrary.simpleMessage("rub."),
         "save": MessageLookupByLibrary.simpleMessage("Save"),
         "settings": MessageLookupByLibrary.simpleMessage("Settings"),
         "so_far_empty": MessageLookupByLibrary.simpleMessage(

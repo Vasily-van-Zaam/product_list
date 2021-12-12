@@ -55,6 +55,7 @@ class _ProductViewState extends State<ProductView> {
   }
 
   List<String> _tooltipListStr = [];
+
   @override
   Widget build(BuildContext context) {
     ProductEntity newEntity = ProductEntity(
@@ -64,6 +65,8 @@ class _ProductViewState extends State<ProductView> {
         price: _price ?? 0,
         quantity: _quantity ?? 0,
         quantityType: _quantityType ?? 'pieces');
+    var currency =
+        S.of(context).lang == 'ru' ? S.of(context).rub : S.of(context).dollar;
 
     return BlocListener<TooltipCubit, TooltipState>(
       listener: (context, state) {
@@ -153,7 +156,7 @@ class _ProductViewState extends State<ProductView> {
                       child: MyTextFieldTwoInOne(
                         controllerLeft: _quantityController,
                         controllerRight: _priceController,
-                        sufix: setSufixOrPrefix('\$'),
+                        sufix: setSufixOrPrefix(currency),
                         prefix: selectPrefix(
                             context: context, character: _character),
                         onChangedRight: (v) {

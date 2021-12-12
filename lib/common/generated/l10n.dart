@@ -60,6 +60,26 @@ class S {
     );
   }
 
+  /// `rub.`
+  String get rub {
+    return Intl.message(
+      'rub.',
+      name: 'rub',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `$`
+  String get dollar {
+    return Intl.message(
+      '\$',
+      name: 'dollar',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Product list app`
   String get title_app {
     return Intl.message(

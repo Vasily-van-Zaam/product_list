@@ -29,6 +29,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Создание нового продукта"),
         "delete": MessageLookupByLibrary.simpleMessage("Удалить"),
         "description": MessageLookupByLibrary.simpleMessage("Описание"),
+        "dollar": MessageLookupByLibrary.simpleMessage("\$"),
         "done": MessageLookupByLibrary.simpleMessage("Выполнено"),
         "editing": MessageLookupByLibrary.simpleMessage("Редакт."),
         "gram": MessageLookupByLibrary.simpleMessage("г."),
@@ -44,6 +45,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Список продуктов"),
         "product_list_done":
             MessageLookupByLibrary.simpleMessage("Список купленных продуктов"),
+        "rub": MessageLookupByLibrary.simpleMessage("руб."),
         "save": MessageLookupByLibrary.simpleMessage("Сохронить"),
         "settings": MessageLookupByLibrary.simpleMessage("Настройки"),
         "so_far_empty": MessageLookupByLibrary.simpleMessage(
