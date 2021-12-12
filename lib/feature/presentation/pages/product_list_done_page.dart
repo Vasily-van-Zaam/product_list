@@ -106,56 +106,67 @@ class _ProductListDonePageState extends State<ProductListDonePage> {
             Container(
               decoration: boxDecoration,
             ),
-            RefreshIndicator(
-              onRefresh: () async {
-                BlocProvider.of<ProductBloc>(context).add(
-                  ProductGetList(),
-                );
-              },
-              child: ListView.builder(
-                padding: const EdgeInsets.only(top: 0),
-                keyboardDismissBehavior:
-                    ScrollViewKeyboardDismissBehavior.onDrag,
-                itemCount: _productList.length,
-                itemBuilder: (context, i) {
-                  var product = _productList[i];
-                  return DissmissibleWidget(
-                    key: ValueKey<int>(_productList[i].id ?? 1),
-                    colorLeft: Colors.blue,
-                    iconLeft: const Icon(
-                      Icons.assignment_return_outlined,
-                      size: 40,
-                      color: Colors.white,
-                    ),
-                    onDismissed: (DismissDirection direction) {
-                      if (direction == DismissDirection.startToEnd) {
-                        BlocProvider.of<ProductBloc>(context).add(
-                          ProductChange(
-                            product.changeStatus(),
+            AnimatedSwitcher(
+              duration: const Duration(milliseconds: 200),
+              transitionBuilder: animatedSwitcherScaleTransition,
+              child: _productList.isEmpty && !_openProductView
+                  ? MessageEmptyList(
+                      S.of(context).so_far_empty,
+                    )
+                  : !_openProductView
+                      ? RefreshIndicator(
+                          onRefresh: () async {
+                            BlocProvider.of<ProductBloc>(context).add(
+                              ProductGetList(),
+                            );
+                          },
+                          child: ListView.builder(
+                            padding: const EdgeInsets.only(top: 0),
+                            keyboardDismissBehavior:
+                                ScrollViewKeyboardDismissBehavior.onDrag,
+                            itemCount: _productList.length,
+                            itemBuilder: (context, i) {
+                              var product = _productList[i];
+                              return DissmissibleWidget(
+                                key: ValueKey<int>(_productList[i].id ?? 1),
+                                colorLeft: Colors.blue,
+                                iconLeft: const Icon(
+                                  Icons.assignment_return_outlined,
+                                  size: 40,
+                                  color: Colors.white,
+                                ),
+                                onDismissed: (DismissDirection direction) {
+                                  if (direction ==
+                                      DismissDirection.startToEnd) {
+                                    BlocProvider.of<ProductBloc>(context).add(
+                                      ProductChange(
+                                        product.changeStatus(),
+                                      ),
+                                    );
+                                  } else {
+                                    BlocProvider.of<ProductBloc>(context).add(
+                                      ProductDelete(product),
+                                    );
+                                  }
+                                  setState(() {
+                                    _productList.removeAt(i);
+                                  });
+                                },
+                                item: _productList,
+                                child: ProductItem(
+                                  product: product,
+                                  onTap: () {
+                                    setState(() {
+                                      _openProductView = true;
+                                      _currentProduct = product;
+                                    });
+                                  },
+                                ),
+                              );
+                            },
                           ),
-                        );
-                      } else {
-                        BlocProvider.of<ProductBloc>(context).add(
-                          ProductDelete(product),
-                        );
-                      }
-                      setState(() {
-                        _productList.removeAt(i);
-                      });
-                    },
-                    item: _productList,
-                    child: ProductItem(
-                      product: product,
-                      onTap: () {
-                        setState(() {
-                          _openProductView = true;
-                          _currentProduct = product;
-                        });
-                      },
-                    ),
-                  );
-                },
-              ),
+                        )
+                      : const SizedBox.shrink(),
             ),
             AnimatedSwitcher(
               duration: const Duration(milliseconds: 300),

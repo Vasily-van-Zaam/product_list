@@ -1,6 +1,9 @@
+import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:product_list/common/generated/l10n.dart';
 
+import 'bloc/product_bloc/product_bloc.dart';
 import 'pages/product_list_done_page.dart';
 import 'pages/product_list_page.dart';
 
@@ -16,6 +19,8 @@ class Navigtion extends StatefulWidget {
 
 class _NavigtionState extends State<Navigtion> {
   int _currentIndex = 0;
+  int _countNew = 0;
+  int _countDone = 0;
 
   final List<Widget> _listPages = const [
     ProductListPage(),
@@ -25,45 +30,47 @@ class _NavigtionState extends State<Navigtion> {
 
   List<BottomNavigationBarItem> itemsButton(context) => [
         BottomNavigationBarItem(
-          icon: const Icon(Icons.list_alt, size: 28),
+          icon: setBadge(
+            _countNew,
+            const Icon(Icons.list_alt, size: 23),
+          ),
           label: S.of(context).list,
           activeIcon: Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(20),
-                boxShadow: buttonBoxShadow,
-              ),
-              child: const Icon(Icons.list_alt_sharp, size: 28)),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(20),
+              boxShadow: buttonBoxShadow,
+            ),
+            child: setBadge(
+                _countNew, const Icon(Icons.list_alt_sharp, size: 30),
+                isShow: false),
+          ),
         ),
         BottomNavigationBarItem(
-          icon: const Icon(Icons.fact_check_outlined, size: 28),
+          icon: setBadge(
+            _countDone,
+            const Icon(Icons.fact_check_outlined, size: 23),
+          ),
           label: S.of(context).done,
           activeIcon: Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(20),
-                boxShadow: buttonBoxShadow,
-              ),
-              child: const Icon(Icons.fact_check_outlined, size: 28)),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(20),
+              boxShadow: buttonBoxShadow,
+            ),
+            child: setBadge(
+                _countDone, const Icon(Icons.fact_check_outlined, size: 30),
+                isShow: false),
+          ),
         ),
         BottomNavigationBarItem(
-          icon: const Icon(Icons.settings, size: 28),
+          icon: const Icon(Icons.settings, size: 23),
           activeIcon: Container(
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(20),
                 boxShadow: buttonBoxShadow,
               ),
-              child: const Icon(Icons.settings, size: 28)),
+              child: const Icon(Icons.settings, size: 30)),
           label: S.of(context).settings,
         ),
-        // BottomNavigationBarItem(
-        //   icon: const Icon(Icons.shopping_cart, size: 28),
-        //   activeIcon: const Icon(Icons.shopping_cart, size: 28),
-        //   label: S.of(context).basket,
-        // ),
-        // BottomNavigationBarItem(
-        //   icon: const Icon(Icons.login, size: 28),
-        //   activeIcon: const Icon(Icons.login, size: 28),
-        //   label: S.of(context).login,
-        // )
       ];
 
   @override
@@ -72,20 +79,32 @@ class _NavigtionState extends State<Navigtion> {
       decoration: BoxDecoration(
         gradient: lightGradientBackgroundScaffold,
       ),
-      child: Scaffold(
-        body: IndexedStack(
-          index: _currentIndex,
-          children: _listPages,
-        ),
-        bottomNavigationBar: BottomNavigationBar(
-          type: BottomNavigationBarType.fixed,
-          unselectedFontSize: 16,
-          selectedFontSize: 18,
-          // selectedItemColor: Theme.of(context).colorScheme.onPrimary,
-          // unselectedItemColor: Theme.of(context).colorScheme.onBackground,
-          currentIndex: _currentIndex,
-          onTap: onTabTapped,
-          items: itemsButton(context),
+      child: BlocListener<ProductBloc, ProductState>(
+        listener: (context, state) {
+          if (state is ProductGetListLoaded) {
+            var countNew = state.list.where((e) => e.isDone == null).length;
+            var countDone = state.list.where((e) => e.isDone is bool).length;
+            setState(() {
+              _countNew = countNew;
+              _countDone = countDone;
+            });
+          }
+        },
+        child: Scaffold(
+          body: IndexedStack(
+            index: _currentIndex,
+            children: _listPages,
+          ),
+          bottomNavigationBar: BottomNavigationBar(
+            type: BottomNavigationBarType.fixed,
+            unselectedFontSize: 16,
+            selectedFontSize: 18,
+            // selectedItemColor: Theme.of(context).colorScheme.onPrimary,
+            // unselectedItemColor: Theme.of(context).colorScheme.onBackground,
+            currentIndex: _currentIndex,
+            onTap: onTabTapped,
+            items: itemsButton(context),
+          ),
         ),
       ),
     );
@@ -96,4 +115,12 @@ class _NavigtionState extends State<Navigtion> {
       _currentIndex = index;
     });
   }
+}
+
+Widget setBadge(int count, Icon icon, {bool isShow = true}) {
+  return Badge(
+    badgeContent: Text('$count'),
+    showBadge: count != 0 && isShow,
+    child: icon,
+  );
 }
