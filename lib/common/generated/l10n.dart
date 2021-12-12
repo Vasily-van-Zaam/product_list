@@ -80,6 +80,16 @@ class S {
     );
   }
 
+  /// `total`
+  String get total {
+    return Intl.message(
+      'total',
+      name: 'total',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Product list app`
   String get title_app {
     return Intl.message(

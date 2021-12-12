@@ -97,11 +97,10 @@ class AppTheme {
       //   fontSize: 18,
       // ),
       subtitle2: const TextStyle(
-        color: Colors.red,
-        fontSize: 18,
+        fontSize: 16,
       ),
       subtitle1: const TextStyle(
-        fontSize: 20,
+        fontSize: 16,
       ),
       // button: TextStyle(
       //   color: Colors.red,

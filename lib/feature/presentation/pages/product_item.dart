@@ -13,40 +13,57 @@ class ProductItem extends StatelessWidget {
   Widget build(BuildContext context) {
     var currency =
         S.of(context).lang == 'ru' ? S.of(context).rub : S.of(context).dollar;
+    var description = product.description;
     return Container(
-      padding: const EdgeInsets.only(top: 10, bottom: 10),
+      // padding: const EdgeInsets.only(top: 10, bottom: 10),
       decoration: boxDecorationItemList,
       child: Material(
         color: Colors.transparent,
         child: ListTile(
+          contentPadding: const EdgeInsets.all(10),
           onTap: onTap,
           leading: getStatusProduct(product.isDone),
-          trailing: SizedBox(
-            width: 100,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text('${product.summ.toInt()} $currency'),
-                Text(
-                  '${product.price.toInt()} $currency/${selectPrefixString(context, product.quantityType)}',
-                ),
-              ],
-            ),
-          ),
           title: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
                 product.name,
+                style: const TextStyle(fontWeight: FontWeight.bold),
               ),
-              Text(
-                '${product.quantity.toInt()}  ${selectPrefixString(context, product.quantityType)}',
-                style: const TextStyle(fontSize: 14),
+              Row(
+                mainAxisSize: MainAxisSize.min,
+                // mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  Expanded(
+                    flex: 3,
+                    child: Text(
+                      '${product.quantity.toInt()}  ${selectPrefixString(context, product.quantityType)}',
+                      style: const TextStyle(fontSize: 14),
+                    ),
+                  ),
+                  Expanded(
+                    flex: 2,
+                    child: Text(
+                      '${S.of(context).total}: ${product.summ.toInt()} $currency',
+                      style: const TextStyle(fontSize: 14),
+                    ),
+                  ),
+                  Expanded(
+                    flex: 2,
+                    child: Text(
+                      '${product.price.toInt()} $currency/${selectPrefixString(context, product.quantityType)}',
+                      style: const TextStyle(fontSize: 14),
+                    ),
+                  ),
+                ],
               ),
-              Text(
-                product.description ?? "",
-                style: const TextStyle(fontSize: 14),
-              )
+              description is String && description.isNotEmpty
+                  ? Text(
+                      description,
+                      style: const TextStyle(
+                          fontSize: 14, fontStyle: FontStyle.italic),
+                    )
+                  : const SizedBox.shrink(),
             ],
           ),
         ),

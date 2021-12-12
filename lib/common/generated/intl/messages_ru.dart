@@ -53,6 +53,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "so_far_nothing_has_been_done":
             MessageLookupByLibrary.simpleMessage("Пока ничего не выполнено"),
         "title_app":
-            MessageLookupByLibrary.simpleMessage("Приложения список продуктов")
+            MessageLookupByLibrary.simpleMessage("Приложения список продуктов"),
+        "total": MessageLookupByLibrary.simpleMessage("итого")
       };
 }

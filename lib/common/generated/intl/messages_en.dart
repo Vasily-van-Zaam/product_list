@@ -51,6 +51,7 @@ class MessageLookup extends MessageLookupByLibrary {
             "So far empty. Add new product"),
         "so_far_nothing_has_been_done": MessageLookupByLibrary.simpleMessage(
             "So far nothing has been done"),
-        "title_app": MessageLookupByLibrary.simpleMessage("Product list app")
+        "title_app": MessageLookupByLibrary.simpleMessage("Product list app"),
+        "total": MessageLookupByLibrary.simpleMessage("total")
       };
 }

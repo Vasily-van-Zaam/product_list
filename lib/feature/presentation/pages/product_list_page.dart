@@ -136,57 +136,61 @@ class _ProductListPageState extends State<ProductListPage> {
                               ProductGetList(),
                             );
                           },
-                          child: ListView.builder(
-                            padding: const EdgeInsets.only(top: 0),
-                            keyboardDismissBehavior:
-                                ScrollViewKeyboardDismissBehavior.onDrag,
-                            itemCount: _productList.length,
-                            itemBuilder: (context, i) {
-                              var product = _productList[i];
-                              return DissmissibleWidget(
-                                key: ValueKey<int>(
-                                  _productList[i].id ?? 1,
-                                ),
-                                iconLeft: const Icon(
-                                  Icons.done,
-                                  size: 40,
-                                  color: Colors.white,
-                                ),
-                                iconRight: const Icon(
-                                  Icons.close_outlined,
-                                  size: 40,
-                                  color: Colors.white,
-                                ),
-                                colorRight: Colors.orange,
-                                onDismissed: (DismissDirection direction) {
-                                  if (direction ==
-                                      DismissDirection.startToEnd) {
-                                    BlocProvider.of<ProductBloc>(context).add(
-                                      ProductChange(product.changeStatus(true)),
-                                    );
-                                  } else {
-                                    BlocProvider.of<ProductBloc>(context).add(
-                                      ProductChange(
-                                          product.changeStatus(false)),
-                                    );
-                                  }
+                          child: Container(
+                            decoration: boxDecoration,
+                            child: ListView.builder(
+                              padding: const EdgeInsets.only(top: 0),
+                              keyboardDismissBehavior:
+                                  ScrollViewKeyboardDismissBehavior.onDrag,
+                              itemCount: _productList.length,
+                              itemBuilder: (context, i) {
+                                var product = _productList[i];
+                                return DissmissibleWidget(
+                                  key: ValueKey<int>(
+                                    _productList[i].id ?? 1,
+                                  ),
+                                  iconLeft: const Icon(
+                                    Icons.done,
+                                    size: 40,
+                                    color: Colors.white,
+                                  ),
+                                  iconRight: const Icon(
+                                    Icons.close_outlined,
+                                    size: 40,
+                                    color: Colors.white,
+                                  ),
+                                  colorRight: Colors.orange,
+                                  onDismissed: (DismissDirection direction) {
+                                    if (direction ==
+                                        DismissDirection.startToEnd) {
+                                      BlocProvider.of<ProductBloc>(context).add(
+                                        ProductChange(
+                                            product.changeStatus(true)),
+                                      );
+                                    } else {
+                                      BlocProvider.of<ProductBloc>(context).add(
+                                        ProductChange(
+                                            product.changeStatus(false)),
+                                      );
+                                    }
 
-                                  setState(() {
-                                    _productList.removeAt(i);
-                                  });
-                                },
-                                item: _productList,
-                                child: ProductItem(
-                                  product: product,
-                                  onTap: () {
                                     setState(() {
-                                      _openProductView = true;
-                                      _currentProduct = product;
+                                      _productList.removeAt(i);
                                     });
                                   },
-                                ),
-                              );
-                            },
+                                  item: _productList,
+                                  child: ProductItem(
+                                    product: product,
+                                    onTap: () {
+                                      setState(() {
+                                        _openProductView = true;
+                                        _currentProduct = product;
+                                      });
+                                    },
+                                  ),
+                                );
+                              },
+                            ),
                           ),
                         )
                       : const SizedBox.shrink(),
