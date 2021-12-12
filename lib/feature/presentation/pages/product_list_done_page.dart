@@ -175,15 +175,6 @@ class _ProductListDonePageState extends State<ProductListDonePage> {
                   ? ProductView(entity: _currentProduct)
                   : const SizedBox.shrink(),
             ),
-            AnimatedSwitcher(
-              duration: const Duration(milliseconds: 200),
-              transitionBuilder: animatedSwitcherScaleTransition,
-              child: _productList.isEmpty
-                  ? MessageEmptyList(
-                      S.of(context).so_far_nothing_has_been_done,
-                    )
-                  : const SizedBox.shrink(),
-            ),
             _isLoading
                 ? const Center(child: CircularProgressIndicator())
                 : const SizedBox.shrink(),
