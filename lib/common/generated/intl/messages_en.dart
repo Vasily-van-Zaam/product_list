@@ -33,6 +33,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "editing": MessageLookupByLibrary.simpleMessage("Editing"),
         "gram": MessageLookupByLibrary.simpleMessage("g."),
         "kgram": MessageLookupByLibrary.simpleMessage("kg."),
+        "lang": MessageLookupByLibrary.simpleMessage("en"),
         "list": MessageLookupByLibrary.simpleMessage("List"),
         "liters": MessageLookupByLibrary.simpleMessage("L."),
         "name": MessageLookupByLibrary.simpleMessage("Name"),

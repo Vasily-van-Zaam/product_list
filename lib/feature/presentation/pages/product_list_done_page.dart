@@ -111,7 +111,12 @@ class _ProductListDonePageState extends State<ProductListDonePage> {
               transitionBuilder: animatedSwitcherScaleTransition,
               child: _productList.isEmpty && !_openProductView
                   ? MessageEmptyList(
-                      S.of(context).so_far_empty,
+                      S.of(context).so_far_nothing_has_been_done,
+                      onTap: () {
+                        BlocProvider.of<ProductBloc>(context).add(
+                          ProductGetList(),
+                        );
+                      },
                     )
                   : !_openProductView
                       ? RefreshIndicator(

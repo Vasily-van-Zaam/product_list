@@ -40,7 +40,8 @@ class _ProductListPageState extends State<ProductListPage> {
     return BlocListener<ProductBloc, ProductState>(
       listener: (context, state) {
         if (state is ProductError) {
-          //TODO
+          //TODO add show errors
+          // ignore: avoid_print
           print(state);
         }
         if (state is ProductLoading) {
@@ -60,6 +61,7 @@ class _ProductListPageState extends State<ProductListPage> {
             _openProductView = false;
             _productList.add(state.entity);
             _isLoading = false;
+            _currentProduct = null;
           });
           BlocProvider.of<ProductBloc>(context).add(
             ProductGetList(),
@@ -74,7 +76,7 @@ class _ProductListPageState extends State<ProductListPage> {
               }
               return e;
             }).toList();
-
+            _currentProduct = null;
             BlocProvider.of<ProductBloc>(context).add(
               ProductGetList(),
             );
@@ -121,6 +123,11 @@ class _ProductListPageState extends State<ProductListPage> {
               child: _productList.isEmpty && !_openProductView
                   ? MessageEmptyList(
                       S.of(context).so_far_empty,
+                      onTap: () {
+                        BlocProvider.of<ProductBloc>(context).add(
+                          ProductGetList(),
+                        );
+                      },
                     )
                   : !_openProductView
                       ? RefreshIndicator(

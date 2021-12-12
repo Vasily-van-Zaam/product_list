@@ -1,13 +1,12 @@
-import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get_it/get_it.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'common/generated/l10n.dart';
 import 'feature/data/datasources/datasources.dart';
 import 'feature/data/repositories/product_repository_impl.dart';
 import 'feature/domain/use_cases/product_case/product_cases.dart';
 import 'feature/data/repositories/tolltip_repository_impl.dart';
 import 'feature/domain/repositories/repositories.dart';
 import 'feature/domain/use_cases/tooltip_case/tooltip_cases.dart';
+import 'feature/presentation/bloc/locale_cubit/locale_cubit.dart';
 import 'feature/presentation/bloc/product_bloc/product_bloc.dart';
 import 'feature/presentation/bloc/tooltip_cubit/tooltip_cubit.dart';
 
@@ -21,6 +20,9 @@ int() async {
 
   sl.registerFactory(
     () => TooltipCubit(sl()),
+  );
+  sl.registerFactory(
+    () => LocaleCubit(),
   );
   // UseCases
   sl.registerLazySingleton(
@@ -47,10 +49,4 @@ int() async {
   // External
   final sharedPreferences = await SharedPreferences.getInstance();
   sl.registerLazySingleton(() => sharedPreferences);
-  sl.registerLazySingleton(() => [
-        S.delegate,
-        GlobalMaterialLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate,
-        GlobalCupertinoLocalizations.delegate,
-      ]);
 }

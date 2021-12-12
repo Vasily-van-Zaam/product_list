@@ -11,14 +11,15 @@ import 'pages/setting_page.dart';
 import 'theme/constant.dart';
 
 class Navigtion extends StatefulWidget {
-  const Navigtion({Key? key}) : super(key: key);
+  final int indexNav;
+  const Navigtion({Key? key, this.indexNav = 0}) : super(key: key);
 
   @override
   _NavigtionState createState() => _NavigtionState();
 }
 
 class _NavigtionState extends State<Navigtion> {
-  int _currentIndex = 0;
+  late int _currentIndex = widget.indexNav;
   int _countNew = 0;
   int _countDone = 0;
 
@@ -64,11 +65,12 @@ class _NavigtionState extends State<Navigtion> {
         BottomNavigationBarItem(
           icon: const Icon(Icons.settings, size: 23),
           activeIcon: Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(20),
-                boxShadow: buttonBoxShadow,
-              ),
-              child: const Icon(Icons.settings, size: 30)),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(20),
+              boxShadow: buttonBoxShadow,
+            ),
+            child: const Icon(Icons.settings, size: 30),
+          ),
           label: S.of(context).settings,
         ),
       ];
@@ -99,8 +101,6 @@ class _NavigtionState extends State<Navigtion> {
             type: BottomNavigationBarType.fixed,
             unselectedFontSize: 16,
             selectedFontSize: 18,
-            // selectedItemColor: Theme.of(context).colorScheme.onPrimary,
-            // unselectedItemColor: Theme.of(context).colorScheme.onBackground,
             currentIndex: _currentIndex,
             onTap: onTabTapped,
             items: itemsButton(context),

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:product_list/common/generated/l10n.dart';
 import 'package:product_list/feature/domain/entities/product_entity.dart';
@@ -50,19 +49,9 @@ class _ProductViewState extends State<ProductView> {
     _priceController.text = _price is double ? _price.toString() : '';
     _descriptionController.text = _description ?? "";
 
-    switch (_quantityType) {
-      case 'liters':
-        _character = SingingCharacter.liters;
-        break;
-      case 'gram':
-        _character = SingingCharacter.gram;
-        break;
-      case 'kgram':
-        _character = SingingCharacter.kgram;
-        break;
-      default:
-        _character = SingingCharacter.pieces;
-    }
+    _character = SingingCharacter.values.firstWhere(
+        (e) => e.name == _quantityType,
+        orElse: () => SingingCharacter.pieces);
   }
 
   List<String> _tooltipListStr = [];
@@ -110,6 +99,7 @@ class _ProductViewState extends State<ProductView> {
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: MyAutocomplete(
+                        optionsMaxHeight: 150,
                         initialValue: _name,
                         label: Text('${S.of(context).name} *'),
                         onRemoveElementOption: (String v) {
@@ -197,9 +187,7 @@ class _ProductViewState extends State<ProductView> {
                               groupValue: _character,
                               onChanged: (SingingCharacter? value) {
                                 setState(() {
-                                  _quantityType = value
-                                      .toString()
-                                      .replaceAll('SingingCharacter.', '');
+                                  _quantityType = value?.name;
                                   _character = value;
                                 });
                               },
@@ -210,9 +198,7 @@ class _ProductViewState extends State<ProductView> {
                               groupValue: _character,
                               onChanged: (SingingCharacter? value) {
                                 setState(() {
-                                  _quantityType = value
-                                      .toString()
-                                      .replaceAll('SingingCharacter.', '');
+                                  _quantityType = value?.name;
                                   _character = value;
                                 });
                               },
@@ -223,9 +209,7 @@ class _ProductViewState extends State<ProductView> {
                               groupValue: _character,
                               onChanged: (SingingCharacter? value) {
                                 setState(() {
-                                  _quantityType = value
-                                      .toString()
-                                      .replaceAll('SingingCharacter.', '');
+                                  _quantityType = value?.name;
                                   _character = value;
                                 });
                               },
@@ -236,9 +220,7 @@ class _ProductViewState extends State<ProductView> {
                               groupValue: _character,
                               onChanged: (SingingCharacter? value) {
                                 setState(() {
-                                  _quantityType = value
-                                      .toString()
-                                      .replaceAll('SingingCharacter.', '');
+                                  _quantityType = value?.name;
                                   _character = value;
                                 });
                               },
@@ -262,7 +244,6 @@ class _ProductViewState extends State<ProductView> {
                                       .add(ProductChange(newEntity));
                                   return;
                                 }
-
                                 BlocProvider.of<ProductBloc>(context)
                                     .add(ProductCreate(newEntity));
                               },

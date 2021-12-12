@@ -42,7 +42,7 @@ class MyTextFieldTwoInOne extends StatelessWidget {
             topLeft: Radius.circular(inputRadius),
             bottomLeft: Radius.circular(inputRadius)),
         borderSide: BorderSide(
-            width: 0, color: Theme.of(context).colorScheme.secondaryVariant),
+            width: 0, color: Theme.of(context).colorScheme.secondaryContainer),
       ),
     );
     InputDecoration _decorationInputMoeny = InputDecoration(
@@ -52,7 +52,7 @@ class MyTextFieldTwoInOne extends StatelessWidget {
             topRight: Radius.circular(inputRadius),
             bottomRight: Radius.circular(inputRadius)),
         borderSide: BorderSide(
-            width: 0, color: Theme.of(context).colorScheme.secondaryVariant),
+            width: 0, color: Theme.of(context).colorScheme.secondaryContainer),
       ),
       focusedBorder: OutlineInputBorder(
         borderRadius: BorderRadius.only(
@@ -223,7 +223,7 @@ class _MyAutocompleteState extends State<MyAutocomplete> {
           bottomLeft: Radius.circular(20),
           bottomRight: Radius.circular(20),
         ),
-        color: Theme.of(context).colorScheme.secondaryVariant,
+        color: Theme.of(context).colorScheme.secondaryContainer,
         elevation: 1.0,
         child: Container(
           constraints: BoxConstraints(
