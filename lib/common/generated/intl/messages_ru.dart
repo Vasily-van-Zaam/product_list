@@ -46,7 +46,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "product_list_done":
             MessageLookupByLibrary.simpleMessage("Список купленных продуктов"),
         "rub": MessageLookupByLibrary.simpleMessage("руб."),
-        "save": MessageLookupByLibrary.simpleMessage("Сохронить"),
+        "save": MessageLookupByLibrary.simpleMessage("Сохранить"),
         "settings": MessageLookupByLibrary.simpleMessage("Настройки"),
         "so_far_empty": MessageLookupByLibrary.simpleMessage(
             "Пока пусто. Добавте новый продукт"),
