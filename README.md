@@ -1,4 +1,4 @@
-# pokemon_list
+# product_list / food_list
 
 A new Flutter project.
 
